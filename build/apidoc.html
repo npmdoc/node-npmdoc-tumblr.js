@@ -1,0 +1,769 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/tumblr/tumblr.js"
+
+    >tumblr.js (v1.1.1)</a>
+</h1>
+<h4>Official JavaScript client for the Tumblr API</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tumblr.js">module tumblr.js</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client">
+            function <span class="apidocSignatureSpan">tumblr.js.</span>Client
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.createClient">
+            function <span class="apidocSignatureSpan">tumblr.js.</span>createClient
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.js.Client">
+            function <span class="apidocSignatureSpan">tumblr.js.</span>js.Client
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tumblr.js.</span>js.Client.prototype</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tumblr.js.Client">module tumblr.js.Client</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client.Client">
+            function <span class="apidocSignatureSpan">tumblr.js.</span>Client
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tumblr.js.Client.prototype">module tumblr.js.Client.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client.prototype.addGetMethods">
+            function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>addGetMethods
+            <span class="apidocSignatureSpan">(methods)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client.prototype.addPostMethods">
+            function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>addPostMethods
+            <span class="apidocSignatureSpan">(methods)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client.prototype.getRequest">
+            function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>getRequest
+            <span class="apidocSignatureSpan">(apiPath, params, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client.prototype.postRequest">
+            function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>postRequest
+            <span class="apidocSignatureSpan">(apiPath, params, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tumblr.js.Client.prototype.returnPromises">
+            function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>returnPromises
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tumblr.js" id="apidoc.module.tumblr.js">module tumblr.js</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client" id="apidoc.element.tumblr.js.Client">
+        function <span class="apidocSignatureSpan">tumblr.js.</span>Client
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function TumblrClient(options) {
+    // Support for `TumblrClient(credentials, baseUrl, requestLibrary)`
+    if (arguments.length &#x3e; 1) {
+        options = {
+            credentials: arguments[0],
+            baseUrl: arguments[1],
+            request: arguments[2],
+            returnPromises: false,
+        };
+    }
+
+    options = options || {};
+
+    this.version = CLIENT_VERSION;
+    this.credentials = get(options, &#x27;credentials&#x27;, omit(options, &#x27;baseUrl&#x27;, &#x27;request&#x27;));
+    this.baseUrl = get(options, &#x27;baseUrl&#x27;, API_BASE_URL);
+    this.request = get(options, &#x27;request&#x27;, request);
+    this.requestOptions = {
+        followRedirect: false,
+        headers: {
+            &#x27;User-Agent&#x27;: &#x27;tumblr.js/&#x27; + CLIENT_VERSION,
+        },
+    };
+
+    this.addGetMethods(API_METHODS.GET);
+    this.addPostMethods(API_METHODS.POST);
+
+<span class="apidocCodeCommentSpan">    /**
+     * Creates a text post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#ptext-posts|API docs}
+     *
+     * @method createTextPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} [params.title] - post title text
+     * @param  {string} params.body - post body text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+</span>    this.createTextPost = wrapCreatePost(&#x27;text&#x27;, [&#x27;body&#x27;]);
+
+    /**
+     * Creates a photo post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#pphoto-posts|API docs}
+     *
+     * @method createPhotoPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} params.source - image source URL
+     * @param  {Stream|Array} params.data - an image or array of images
+     * @param  {string} params.data64 - base64-encoded image data
+     * @param  {string} [params.caption] - post caption text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+    this.createPhotoPost = wrapCreatePost(&#x27;photo&#x27;, [&#x27;data&#x27;, &#x27;data64&#x27;, &#x27;source&#x27;]);
+
+    /**
+     * Creates a quote post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#pquote-posts|API docs}
+     *
+     * @method createQuotePost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} params.quote - quote text
+     * @param  {string} [params.source] - quote source
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+    this.createQuotePost = wrapCreatePost(&#x27;quote&#x27;, [&#x27;quote&#x27;]);
+
+    /**
+     * Creates a link post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#plink-posts|API docs}
+     *
+     * @method createLinkPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} [params.title] - post title text
+     * @param  {string} params.url - the link URL
+     * @param  {string} [params.thumbnail] - the URL of an image to use as the thumbnail
+     * @param  {string} [params.excerpt] - an excerpt from the page the link points to
+     * @param  {string} [params.author] - the name of the author of the page the link points to
+     * @param  {string} [params.description] - post caption text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+```
+
+Or, if you prefer:
+
+```js
+var tumblr = require(&#x27;tumblr.js&#x27;);
+var client = new tumblr.<span class="apidocCodeKeywordSpan">Client</span>({
+  // ...
+});
+```
+
+The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that&#x27;s more
+ your thing. Pass `returnPromises: true` in the options to `createClient`:
+
+```js
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.createClient" id="apidoc.element.tumblr.js.createClient">
+        function <span class="apidocSignatureSpan">tumblr.js.</span>createClient
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">createClient = function (options) {
+    // Support for `TumblrClient(credentials, baseUrl, requestLibrary)`
+    if (arguments.length &#x3e; 1) {
+        options = {
+            credentials: arguments[0],
+            baseUrl: arguments[1],
+            request: arguments[2],
+            returnPromises: false,
+        };
+    }
+
+    // Create the Tumblr Client
+    var client = new TumblrClient(options);
+
+    return client;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+If you&#x27;re building an application of your own for users out in the world, you&#x27;ll need to go through the 3-legged OAuth
+ flow. See the [help docs](https://www.tumblr.com/docs/api/v2#auth) for more info.
+
+### In Node.js
+
+```js
+var tumblr = require(&#x27;tumblr.js&#x27;);
+var client = tumblr.<span class="apidocCodeKeywordSpan">createClient</span>({
+  consumer_key: &#x27;&#x3c;consumer key&#x3e;&#x27;,
+  consumer_secret: &#x27;&#x3c;consumer secret&#x3e;&#x27;,
+  token: &#x27;&#x3c;oauth token&#x3e;&#x27;,
+  token_secret: &#x27;&#x3c;oauth token secret&#x3e;&#x27;
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.js.Client" id="apidoc.element.tumblr.js.js.Client">
+        function <span class="apidocSignatureSpan">tumblr.js.</span>js.Client
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function TumblrClient(options) {
+    // Support for `TumblrClient(credentials, baseUrl, requestLibrary)`
+    if (arguments.length &#x3e; 1) {
+        options = {
+            credentials: arguments[0],
+            baseUrl: arguments[1],
+            request: arguments[2],
+            returnPromises: false,
+        };
+    }
+
+    options = options || {};
+
+    this.version = CLIENT_VERSION;
+    this.credentials = get(options, &#x27;credentials&#x27;, omit(options, &#x27;baseUrl&#x27;, &#x27;request&#x27;));
+    this.baseUrl = get(options, &#x27;baseUrl&#x27;, API_BASE_URL);
+    this.request = get(options, &#x27;request&#x27;, request);
+    this.requestOptions = {
+        followRedirect: false,
+        headers: {
+            &#x27;User-Agent&#x27;: &#x27;tumblr.js/&#x27; + CLIENT_VERSION,
+        },
+    };
+
+    this.addGetMethods(API_METHODS.GET);
+    this.addPostMethods(API_METHODS.POST);
+
+<span class="apidocCodeCommentSpan">    /**
+     * Creates a text post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#ptext-posts|API docs}
+     *
+     * @method createTextPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} [params.title] - post title text
+     * @param  {string} params.body - post body text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+</span>    this.createTextPost = wrapCreatePost(&#x27;text&#x27;, [&#x27;body&#x27;]);
+
+    /**
+     * Creates a photo post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#pphoto-posts|API docs}
+     *
+     * @method createPhotoPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} params.source - image source URL
+     * @param  {Stream|Array} params.data - an image or array of images
+     * @param  {string} params.data64 - base64-encoded image data
+     * @param  {string} [params.caption] - post caption text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+    this.createPhotoPost = wrapCreatePost(&#x27;photo&#x27;, [&#x27;data&#x27;, &#x27;data64&#x27;, &#x27;source&#x27;]);
+
+    /**
+     * Creates a quote post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#pquote-posts|API docs}
+     *
+     * @method createQuotePost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} params.quote - quote text
+     * @param  {string} [params.source] - quote source
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+    this.createQuotePost = wrapCreatePost(&#x27;quote&#x27;, [&#x27;quote&#x27;]);
+
+    /**
+     * Creates a link post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#plink-posts|API docs}
+     *
+     * @method createLinkPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} [params.title] - post title text
+     * @param  {string} params.url - the link URL
+     * @param  {string} [params.thumbnail] - the URL of an image to use as the thumbnail
+     * @param  {string} [params.excerpt] - an excerpt from the page the link points to
+     * @param  {string} [params.author] - the name of the author of the page the link points to
+     * @param  {string} [params.description] - post caption text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tumblr.js.Client" id="apidoc.module.tumblr.js.Client">module tumblr.js.Client</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client.Client" id="apidoc.element.tumblr.js.Client.Client">
+        function <span class="apidocSignatureSpan">tumblr.js.</span>Client
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function TumblrClient(options) {
+    // Support for `TumblrClient(credentials, baseUrl, requestLibrary)`
+    if (arguments.length &#x3e; 1) {
+        options = {
+            credentials: arguments[0],
+            baseUrl: arguments[1],
+            request: arguments[2],
+            returnPromises: false,
+        };
+    }
+
+    options = options || {};
+
+    this.version = CLIENT_VERSION;
+    this.credentials = get(options, &#x27;credentials&#x27;, omit(options, &#x27;baseUrl&#x27;, &#x27;request&#x27;));
+    this.baseUrl = get(options, &#x27;baseUrl&#x27;, API_BASE_URL);
+    this.request = get(options, &#x27;request&#x27;, request);
+    this.requestOptions = {
+        followRedirect: false,
+        headers: {
+            &#x27;User-Agent&#x27;: &#x27;tumblr.js/&#x27; + CLIENT_VERSION,
+        },
+    };
+
+    this.addGetMethods(API_METHODS.GET);
+    this.addPostMethods(API_METHODS.POST);
+
+<span class="apidocCodeCommentSpan">    /**
+     * Creates a text post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#ptext-posts|API docs}
+     *
+     * @method createTextPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} [params.title] - post title text
+     * @param  {string} params.body - post body text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+</span>    this.createTextPost = wrapCreatePost(&#x27;text&#x27;, [&#x27;body&#x27;]);
+
+    /**
+     * Creates a photo post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#pphoto-posts|API docs}
+     *
+     * @method createPhotoPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} params.source - image source URL
+     * @param  {Stream|Array} params.data - an image or array of images
+     * @param  {string} params.data64 - base64-encoded image data
+     * @param  {string} [params.caption] - post caption text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+    this.createPhotoPost = wrapCreatePost(&#x27;photo&#x27;, [&#x27;data&#x27;, &#x27;data64&#x27;, &#x27;source&#x27;]);
+
+    /**
+     * Creates a quote post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#pquote-posts|API docs}
+     *
+     * @method createQuotePost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} params.quote - quote text
+     * @param  {string} [params.source] - quote source
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient
+     */
+    this.createQuotePost = wrapCreatePost(&#x27;quote&#x27;, [&#x27;quote&#x27;]);
+
+    /**
+     * Creates a link post on the given blog
+     *
+     * @see {@link https://www.tumblr.com/docs/api/v2#plink-posts|API docs}
+     *
+     * @method createLinkPost
+     *
+     * @param  {string} blogIdentifier - blog name or URL
+     * @param  {Object} params - parameters sent with the request
+     * @param  {string} [params.title] - post title text
+     * @param  {string} params.url - the link URL
+     * @param  {string} [params.thumbnail] - the URL of an image to use as the thumbnail
+     * @param  {string} [params.excerpt] - an excerpt from the page the link points to
+     * @param  {string} [params.author] - the name of the author of the page the link points to
+     * @param  {string} [params.description] - post caption text
+     * @param  {TumblrClient~callback} [callback] - invoked when the request completes
+     *
+     * @return {Request|Promise} Request object, or Promise if {@link returnPromises} was used
+     *
+     * @memberof TumblrClient ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+```
+
+Or, if you prefer:
+
+```js
+var tumblr = require(&#x27;tumblr.js&#x27;);
+var client = new tumblr.<span class="apidocCodeKeywordSpan">Client</span>({
+  // ...
+});
+```
+
+The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that&#x27;s more
+ your thing. Pass `returnPromises: true` in the options to `createClient`:
+
+```js
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tumblr.js.Client.prototype" id="apidoc.module.tumblr.js.Client.prototype">module tumblr.js.Client.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client.prototype.addGetMethods" id="apidoc.element.tumblr.js.Client.prototype.addGetMethods">
+        function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>addGetMethods
+        <span class="apidocSignatureSpan">(methods)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addGetMethods = function (methods) {
+    addMethods(this, methods, &#x27;GET&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+client.postRequest(apiPath, params, callback);
+```
+
+In the unlikely event that we add a bunch of methods to the API docs and don&#x27;t update this client, you can map new client methods
+ to API endpoints. URL and query parameters are automatically turned into arguments to these methods. It&#x27;s a little weird to
+ explain, so just look at these examples:
+
+```js
+// GET methods
+client.<span class="apidocCodeKeywordSpan">addGetMethods</span>({
+  // creates client.userInfo(params, callback)
+  userInfo: &#x27;/user/info&#x27;,
+  // client.blogInfo(blogIdentifier, params, callback)
+  blogInfo: &#x27;/blog/:blogIdentifier/info&#x27;,
+  // Creates client.taggedPosts(tag, params, callback)
+  taggedPosts: [&#x27;/tagged&#x27;, [&#x27;tag&#x27;]],
+});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client.prototype.addPostMethods" id="apidoc.element.tumblr.js.Client.prototype.addPostMethods">
+        function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>addPostMethods
+        <span class="apidocSignatureSpan">(methods)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addPostMethods = function (methods) {
+    addMethods(this, methods, &#x27;POST&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  // client.blogInfo(blogIdentifier, params, callback)
+  blogInfo: &#x27;/blog/:blogIdentifier/info&#x27;,
+  // Creates client.taggedPosts(tag, params, callback)
+  taggedPosts: [&#x27;/tagged&#x27;, [&#x27;tag&#x27;]],
+});
+
+// POST methods
+client.<span class="apidocCodeKeywordSpan">addPostMethods</span>({
+  // client.deletePost(blogIdentifier, id, params, callback)
+  deletePost: [&#x27;/blog/:blogIdentifier/post/delete&#x27;, [&#x27;id&#x27;]],
+  // Creates client.likePost(tag, id, reblog_key, params, callback)
+  likePost: [&#x27;/user/like&#x27;, [&#x27;id&#x27;, &#x27;reblog_key&#x27;]],
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client.prototype.getRequest" id="apidoc.element.tumblr.js.Client.prototype.getRequest">
+        function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>getRequest
+        <span class="apidocSignatureSpan">(apiPath, params, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getRequest = function (apiPath, params, callback) {
+    if (isFunction(params)) {
+        callback = params;
+        params = {};
+    }
+    return getRequest(this.request.get, this.credentials, this.baseUrl, apiPath, this.requestOptions, params, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## Unsupported Methods
+
+You can make GET and POST requests to any endpoint directly. These methods are used internally by the methods listed above:
+
+```js
+// GET requests
+client.<span class="apidocCodeKeywordSpan">getRequest</span>(apiPath, params, callback);
+
+// POST requests
+client.postRequest(apiPath, params, callback);
+```
+
+In the unlikely event that we add a bunch of methods to the API docs and don&#x27;t update this client, you can map new client methods
+ to API endpoints. URL and query parameters are automatically turned into arguments to these methods. It&#x27;s a little weird to
+ explain, so just look at these examples:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client.prototype.postRequest" id="apidoc.element.tumblr.js.Client.prototype.postRequest">
+        function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>postRequest
+        <span class="apidocSignatureSpan">(apiPath, params, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">postRequest = function (apiPath, params, callback) {
+    if (isFunction(params)) {
+        callback = params;
+        params = {};
+    }
+    return postRequest(this.request.post, this.credentials, this.baseUrl, apiPath, this.requestOptions, params, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+You can make GET and POST requests to any endpoint directly. These methods are used internally by the methods listed above:
+
+```js
+// GET requests
+client.getRequest(apiPath, params, callback);
+
+// POST requests
+client.<span class="apidocCodeKeywordSpan">postRequest</span>(apiPath, params, callback);
+```
+
+In the unlikely event that we add a bunch of methods to the API docs and don&#x27;t update this client, you can map new client methods
+ to API endpoints. URL and query parameters are automatically turned into arguments to these methods. It&#x27;s a little weird to
+ explain, so just look at these examples:
+
+```js
+// GET methods
+client.addGetMethods({
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tumblr.js.Client.prototype.returnPromises" id="apidoc.element.tumblr.js.Client.prototype.returnPromises">
+        function <span class="apidocSignatureSpan">tumblr.js.Client.prototype.</span>returnPromises
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">returnPromises = function () {
+    this.getRequest = promisifyRequest(this.getRequest);
+    this.postRequest = promisifyRequest(this.postRequest);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
